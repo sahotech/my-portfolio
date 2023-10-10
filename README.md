@@ -4,8 +4,6 @@ This is a personal portfolio website built using  DART as Programming and FlameW
 
 -Pleasc check out the website by clicking on this [Link](https://sahotech.github.io/)
 
-This is only the web verion  of the project. To use this templete.
-
 Clone the repository: `git clone https://github.com/sahotech/my-portfolio.git`
 
 
