@@ -398,10 +398,8 @@ class MHomeScreen extends StatelessWidget {
                               children: [
                                 CircleAvatar(
                                   radius: 50,
-                                  child: Image.asset(
+                                  backgroundImage: AssetImage(
                                     e["pic"],
-                                    fit: BoxFit.cover,
-                                    filterQuality: FilterQuality.high,
                                   ),
                                 ),
                                 const SizedBox(height: 10),

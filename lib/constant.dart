@@ -133,10 +133,8 @@ authoScrollTest(Size ss, BuildContext context) {
                   // const SizedBox(height: 10),
                   CircleAvatar(
                     radius: 50,
-                    child: Image.asset(
+                    backgroundImage: AssetImage(
                       testimonial[index]["pic"],
-                      fit: BoxFit.cover,
-                      filterQuality: FilterQuality.high,
                     ),
                   ),
                   const SizedBox(height: 10),
