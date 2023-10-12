@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -227,44 +229,101 @@ class MHomeScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  // height: ss.height,
-                  width: ss.width * 0.8,
-                  child: ListView.builder(
-                    // scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    primary: false,
-                    itemCount: 5,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          height: 560,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: myBoxShadow,
-                            color: Colors.white,
-                          ),
-                          child: Column(
-                            children: [
-                              const Text('data'),
-                              SizedBox(
-                                width: ss.width * 0.6,
-                                height: 500,
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    color: Colors.black38,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                Container(
+                  color: Colors.amber,
+                  padding: const EdgeInsets.all(8),
+                  child: const Text('Western tyre App'),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  height: ss.height - 200,
+                  width: ss.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: myBoxShadow,
                   ),
-                )
+                  child: ScrollConfiguration(
+                    behavior:
+                        ScrollConfiguration.of(context).copyWith(dragDevices: {
+                      PointerDeviceKind.touch,
+                      PointerDeviceKind.mouse,
+                    }),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: western.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Container(
+                            height: ss.height - 200,
+                            decoration: const BoxDecoration(
+                                // image: DecorationImage(
+                                //   image: AssetImage(profile),
+                                // ),
+                                ),
+                            child: Image.asset(
+                              western[index],
+                              fit: BoxFit.fitHeight,
+                              filterQuality: FilterQuality.high,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  color: Colors.amber,
+                  padding: const EdgeInsets.all(8),
+                  child: const Text('News Portal App'),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  height: ss.height - 200,
+                  width: ss.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: myBoxShadow,
+                  ),
+                  child: ScrollConfiguration(
+                    behavior:
+                        ScrollConfiguration.of(context).copyWith(dragDevices: {
+                      PointerDeviceKind.touch,
+                      PointerDeviceKind.mouse,
+                    }),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: newportal.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Container(
+                            height: ss.height - 200,
+                            decoration: const BoxDecoration(
+                                // image: DecorationImage(
+                                //   image: AssetImage(profile),
+                                // ),
+                                ),
+                            child: Image.asset(
+                              newportal[index],
+                              fit: BoxFit.fitHeight,
+                              filterQuality: FilterQuality.high,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

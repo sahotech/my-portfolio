@@ -11,6 +11,7 @@ import 'package:sahotech_portfolio/responsive/desktop_screens/d_contact.dart';
 import 'package:sahotech_portfolio/responsive/desktop_screens/d_home.dart';
 import 'package:sahotech_portfolio/responsive/desktop_screens/d_project.dart';
 import 'package:sahotech_portfolio/responsive/desktop_screens/d_service.dart';
+import 'package:sahotech_portfolio/widgets/footer_widget.dart';
 
 class DesktopMainScreen extends StatefulWidget {
   const DesktopMainScreen({super.key});
@@ -197,6 +198,8 @@ class _DesktopMainScreenState extends State<DesktopMainScreen> {
                       },
                     ),
                   ),
+                  Spacer(),
+                  const CustomFooter(),
                 ],
               ),
             ),

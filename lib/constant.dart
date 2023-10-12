@@ -223,19 +223,16 @@ skillWidget({
 }
 
 // List of screenshot
-List screenShots = [
+List western = [
   "images/s1.jpg",
   "images/s2.jpg",
   "images/s3.jpg",
   "images/s4.jpg",
   "images/s5.jpg",
   "images/s6.jpg",
-  "images/s7.jpg",
+];
+List newportal = [
   "images/s8.jpg",
-  "images/s9.jpg",
-  "images/s10.jpg",
-  "images/s11.jpg",
-  // "images/s1.jpg",
 ];
 
 /// List Testimonial

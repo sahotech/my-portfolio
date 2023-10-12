@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -243,30 +245,101 @@ class THomeScreen extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 20,
-                      childAspectRatio: 1 / 1.8,
-                    ),
-                    itemCount: 8,
-                    shrinkWrap: true,
-                    primary: false,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CupertinoButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        child: Container(
-                          color: Colors.amber,
-                        ),
-                      );
-                    },
+                Container(
+                  color: Colors.amber,
+                  padding: const EdgeInsets.all(8),
+                  child: const Text('Western tyre App'),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  height: ss.height - 100,
+                  width: ss.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: myBoxShadow,
                   ),
-                )
+                  child: ScrollConfiguration(
+                    behavior:
+                        ScrollConfiguration.of(context).copyWith(dragDevices: {
+                      PointerDeviceKind.touch,
+                      PointerDeviceKind.mouse,
+                    }),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: western.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Container(
+                            height: ss.height - 150,
+                            decoration: const BoxDecoration(
+                                // image: DecorationImage(
+                                //   image: AssetImage(profile),
+                                // ),
+                                ),
+                            child: Image.asset(
+                              western[index],
+                              fit: BoxFit.fitHeight,
+                              filterQuality: FilterQuality.high,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  color: Colors.amber,
+                  padding: const EdgeInsets.all(8),
+                  child: const Text('News Portal App'),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  height: ss.height - 100,
+                  width: ss.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: myBoxShadow,
+                  ),
+                  child: ScrollConfiguration(
+                    behavior:
+                        ScrollConfiguration.of(context).copyWith(dragDevices: {
+                      PointerDeviceKind.touch,
+                      PointerDeviceKind.mouse,
+                    }),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: newportal.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Container(
+                            height: ss.height - 150,
+                            decoration: const BoxDecoration(
+                                // image: DecorationImage(
+                                //   image: AssetImage(profile),
+                                // ),
+                                ),
+                            child: Image.asset(
+                              newportal[index],
+                              fit: BoxFit.fitHeight,
+                              filterQuality: FilterQuality.high,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
