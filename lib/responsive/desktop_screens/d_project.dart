@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sahotech_portfolio/constant.dart';
 import 'package:sahotech_portfolio/widgets/all_project.dart';
 import 'package:sahotech_portfolio/widgets/apps.dart';
 import 'package:sahotech_portfolio/widgets/designs.dart';
@@ -84,6 +85,7 @@ class _DProjectScreenState extends State<DProjectScreen> {
                       onPressed: () {},
                       child: Container(
                         color: Colors.amber,
+                        child: Image.network(profile),
                       ),
                     );
                   },

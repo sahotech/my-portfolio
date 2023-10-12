@@ -57,26 +57,26 @@ class _MContactScreenState extends State<MContactScreen> {
               ),
               child: Column(
                 children: [
-                  contactrow(
-                    ss: ss,
-                    icon: Icons.location_on_outlined,
-                    title: "Location",
-                    text: "HUVU AVENUE, Takoradi, Ghana",
-                  ),
-                  const SizedBox(height: 20),
-                  contactrow(
-                    ss: ss,
-                    icon: Icons.email_outlined,
-                    title: "Email",
-                    text: "sahotech06@gmail.com",
-                  ),
-                  const SizedBox(height: 20),
-                  contactrow(
-                    ss: ss,
-                    icon: Icons.call_outlined,
-                    title: "Call",
-                    text: "+233 242780205, +233 256787512 ",
-                  ),
+                  // contactrow(
+                  //   ss: ss,
+                  //   icon: Icons.location_on_outlined,
+                  //   title: "Location",
+                  //   text: "HUVU AVENUE, Takoradi, Ghana",
+                  // ),
+                  // const SizedBox(height: 20),
+                  // contactrow(
+                  //   ss: ss,
+                  //   icon: Icons.email_outlined,
+                  //   title: "Email",
+                  //   text: "sahotech06@gmail.com",
+                  // ),
+                  // const SizedBox(height: 20),
+                  // contactrow(
+                  //   ss: ss,
+                  //   icon: Icons.call_outlined,
+                  //   title: "Call",
+                  //   text: "+233 242780205, +233 256787512 ",
+                  // ),
                   const SizedBox(height: 20),
                 ],
               ),

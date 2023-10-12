@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+var firestore = FirebaseFirestore.instance;
 
 const String profile =
     'https://firebasestorage.googleapis.com/v0/b/sahotech-portfolio.appspot.com/o/images%2FFB_IMG_1588082663797%20(2).jpg?alt=media&token=d100f4b0-625b-45c0-9b19-c44d9ae12e34&_gl=1*1iohteh*_ga*ODk3ODcyMDkzLjE2OTQ5NjI3NzY.*_ga_CW55HF8NVT*MTY5NjQyMTE1OS4yMi4xLjE2OTY0MjE0ODEuNjAuMC4w';
@@ -57,51 +60,51 @@ skillContainer(String language, String percentage, double value) {
   );
 }
 
-contactrow({
-  required Size ss,
-  required IconData icon,
-  required String title,
-  required String text,
-}) {
-  return Row(
-    children: [
-      CircleAvatar(
-        backgroundColor: Colors.amber.shade100,
-        child: Icon(
-          icon,
-          color: Colors.amber.shade800,
-        ),
-      ),
-      const SizedBox(width: 20),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            ),
-          ),
-          SizedBox(
-            width: ss.width / 1.7,
-            child: Text(
-              text,
-              maxLines: 2,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: Colors.black38,
-              ),
-            ),
-          )
-        ],
-      )
-    ],
-  );
-}
+// contactrow({
+//   required Size ss,
+//   required IconData icon,
+//   required String title,
+//   required String text,
+// }) {
+//   return Row(
+//     children: [
+//       CircleAvatar(
+//         backgroundColor: Colors.amber.shade100,
+//         child: Icon(
+//           icon,
+//           color: Colors.amber.shade800,
+//         ),
+//       ),
+//       const SizedBox(width: 20),
+//       Column(
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Text(
+//             title,
+//             style: const TextStyle(
+//               fontSize: 22,
+//               fontWeight: FontWeight.w500,
+//               color: Colors.black,
+//             ),
+//           ),
+//           SizedBox(
+//             width: ss.width / 1.7,
+//             child: Text(
+//               text,
+//               maxLines: 2,
+//               style: const TextStyle(
+//                 fontSize: 16,
+//                 fontWeight: FontWeight.w400,
+//                 color: Colors.black38,
+//               ),
+//             ),
+//           )
+//         ],
+//       )
+//     ],
+//   );
+// }
 
 authoScrollTest(Size ss, BuildContext context) {
   return ScrollConfiguration(
@@ -218,6 +221,22 @@ skillWidget({
     ],
   );
 }
+
+// List of screenshot
+List screenShots = [
+  "images/s1.jpg",
+  "images/s2.jpg",
+  "images/s3.jpg",
+  "images/s4.jpg",
+  "images/s5.jpg",
+  "images/s6.jpg",
+  "images/s7.jpg",
+  "images/s8.jpg",
+  "images/s9.jpg",
+  "images/s10.jpg",
+  "images/s11.jpg",
+  // "images/s1.jpg",
+];
 
 /// List Testimonial
 List servicesItem = [

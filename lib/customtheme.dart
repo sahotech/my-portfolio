@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 themedData() {
   return ThemeData(
+    primarySwatch: Colors.amber,
     useMaterial3: true,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
