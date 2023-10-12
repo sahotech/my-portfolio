@@ -23,7 +23,7 @@ class _MobileMainScreenState extends State<MobileMainScreen> {
   late final AssetBundle? bundle;
   // List of Nav text
   List<dynamic> navItems = [
-    {'text': 'Home', 'icon': Icons.home_outlined, 'page': MHomeScreen()},
+    {'text': 'Home', 'icon': Icons.home_outlined, 'page': const MHomeScreen()},
     {
       'text': 'About',
       'icon': Icons.person_outline,
@@ -48,48 +48,67 @@ class _MobileMainScreenState extends State<MobileMainScreen> {
 
   int currentIndex = 0;
 
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isLoading = true;
+    Future.delayed(const Duration(seconds: 5), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
+
   final GlobalKey<ScaffoldState> sccaffoldState = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     final ss = MediaQuery.sizeOf(context);
-    return Scaffold(
-      key: sccaffoldState,
-      backgroundColor: bgColor,
-      drawer: customeDrawer(ss),
-      body: Stack(
-        children: [
-          // Main Body
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 4,
+    return isLoading
+        ? const Center(
+            child: CircularProgressIndicator(
+              color: Colors.amber,
             ),
-            child: navItems[currentIndex]['page'],
-          ),
+          )
+        : Scaffold(
+            key: sccaffoldState,
+            backgroundColor: bgColor,
+            drawer: customeDrawer(ss),
+            body: Stack(
+              children: [
+                // Main Body
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                  ),
+                  child: navItems[currentIndex]['page'],
+                ),
 
-          // Menu bar
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: CupertinoButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  sccaffoldState.currentState!.openDrawer();
-                },
-                child: const CircleAvatar(
-                  backgroundColor: Colors.amber,
-                  child: Icon(
-                    Icons.menu,
-                    color: Colors.white,
+                // Menu bar
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: CupertinoButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        sccaffoldState.currentState!.openDrawer();
+                      },
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.amber,
+                        child: Icon(
+                          Icons.menu,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
   }
 
   customeDrawer(ss) {

@@ -55,6 +55,7 @@ class _MProjectScreenState extends State<MProjectScreen> {
                 fontSize: 16,
               ),
             ),
+            const SizedBox(height: 20),
             Container(
               color: Colors.amber,
               padding: const EdgeInsets.all(8),
@@ -91,11 +92,15 @@ class _MProjectScreenState extends State<MProjectScreen> {
                             //   image: AssetImage(profile),
                             // ),
                             ),
-                        child: Image.asset(
-                          western[index],
-                          fit: BoxFit.fitHeight,
-                          filterQuality: FilterQuality.high,
-                        ),
+                        child: western[index] != null
+                            ? Image.asset(
+                                western[index],
+                                fit: BoxFit.fitHeight,
+                                filterQuality: FilterQuality.high,
+                              )
+                            : const CircularProgressIndicator(
+                                color: Colors.amber,
+                              ),
                       ),
                     );
                   },

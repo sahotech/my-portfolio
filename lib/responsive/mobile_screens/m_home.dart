@@ -8,13 +8,35 @@ import 'package:sahotech_portfolio/constant.dart';
 
 import 'package:sahotech_portfolio/widgets/footer_widget.dart';
 
-class MHomeScreen extends StatelessWidget {
-  MHomeScreen({super.key});
+class MHomeScreen extends StatefulWidget {
+  const MHomeScreen({super.key});
 
+  @override
+  State<MHomeScreen> createState() => _MHomeScreenState();
+}
+
+class _MHomeScreenState extends State<MHomeScreen> {
   final TextEditingController email = TextEditingController();
+
   final TextEditingController name = TextEditingController();
+
   final TextEditingController subject = TextEditingController();
+
   final TextEditingController message = TextEditingController();
+
+  // bool isLoading = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   isLoading = true;
+  //   Future.delayed(const Duration(seconds: 8), () {
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -542,7 +564,7 @@ class MHomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     boxShadow: myBoxShadow,
                   ),
-                  child: Column(
+                  child: const Column(
                     children: [
                       // contactrow(
                       //   ss: ss,
@@ -557,14 +579,14 @@ class MHomeScreen extends StatelessWidget {
                       //   title: "Email",
                       //   text: "sahotech06@gmail.com",
                       // ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
                       // contactrow(
                       //   ss: ss,
                       //   icon: Icons.call_outlined,
                       //   title: "Call",
                       //   text: "+233 242780205, +233 256787512 ",
                       // ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),
