@@ -1,12 +1,11 @@
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-var firestore = FirebaseFirestore.instance;
+// var firestore = FirebaseFirestore.instance;
 
-const String profile =
-    'https://firebasestorage.googleapis.com/v0/b/sahotech-portfolio.appspot.com/o/images%2FFB_IMG_1588082663797%20(2).jpg?alt=media&token=d100f4b0-625b-45c0-9b19-c44d9ae12e34&_gl=1*1iohteh*_ga*ODk3ODcyMDkzLjE2OTQ5NjI3NzY.*_ga_CW55HF8NVT*MTY5NjQyMTE1OS4yMi4xLjE2OTY0MjE0ODEuNjAuMC4w';
+const String profile = 'images/profile.jpg';
 
 myLine(width) {
   return Container(height: 3, width: width, color: Colors.amber);
@@ -36,6 +35,52 @@ var myBoxShadow = const [
   ), //BoxShadow
 ];
 
+contactrow({
+  required Size ss,
+  required String title,
+  required String text,
+  required IconData icon,
+}) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      CircleAvatar(
+        radius: 25,
+        backgroundColor: Colors.amber.shade100,
+        child: Icon(
+          icon,
+          color: Colors.amber.shade500,
+        ),
+      ),
+      const SizedBox(width: 10),
+      Flexible(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              text,
+              maxLines: 2,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey.shade600),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
 // Skill Container
 skillContainer(String language, String percentage, double value) {
   return Expanded(
@@ -60,51 +105,95 @@ skillContainer(String language, String percentage, double value) {
   );
 }
 
-// contactrow({
-//   required Size ss,
-//   required IconData icon,
-//   required String title,
-//   required String text,
-// }) {
-//   return Row(
-//     children: [
-//       CircleAvatar(
-//         backgroundColor: Colors.amber.shade100,
-//         child: Icon(
-//           icon,
-//           color: Colors.amber.shade800,
-//         ),
-//       ),
-//       const SizedBox(width: 20),
-//       Column(
-//         mainAxisAlignment: MainAxisAlignment.start,
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             title,
-//             style: const TextStyle(
-//               fontSize: 22,
-//               fontWeight: FontWeight.w500,
-//               color: Colors.black,
-//             ),
-//           ),
-//           SizedBox(
-//             width: ss.width / 1.7,
-//             child: Text(
-//               text,
-//               maxLines: 2,
-//               style: const TextStyle(
-//                 fontSize: 16,
-//                 fontWeight: FontWeight.w400,
-//                 color: Colors.black38,
-//               ),
-//             ),
-//           )
-//         ],
-//       )
-//     ],
-//   );
-// }
+myDialog({
+  required BuildContext context,
+  required String message,
+  required String title,
+  required IconData icon,
+}) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) {
+      return AlertDialog(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 32,
+              color: Colors.black54,
+            ),
+            const SizedBox(width: 10),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
+            ),
+          ],
+        ),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              'Ok',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.amber.shade500,
+              ),
+            ),
+          )
+        ],
+      );
+    },
+  );
+}
+
+showBanner(
+  BuildContext context,
+  String msg,
+  IconData icon,
+) {
+  return ScaffoldMessenger.of(context).showMaterialBanner(MaterialBanner(
+    backgroundColor: Colors.black,
+    // animation: ,
+
+    padding: const EdgeInsets.symmetric(horizontal: 24),
+    elevation: 1,
+    leading: Icon(
+      icon,
+      color: Colors.white,
+    ),
+    content: Align(
+      alignment: Alignment.topCenter,
+      child: SizedBox(
+          width: 400,
+          child: Text(
+            msg,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          )),
+    ),
+    actions: [
+      IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: const Icon(Icons.close),
+        color: Colors.white,
+      ),
+    ],
+  ));
+}
 
 authoScrollTest(Size ss, BuildContext context) {
   return ScrollConfiguration(
@@ -162,6 +251,8 @@ authoScrollTest(Size ss, BuildContext context) {
                   ),
 
                   RichText(
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
                     text: TextSpan(
                       children: [
                         const TextSpan(
@@ -174,9 +265,9 @@ authoScrollTest(Size ss, BuildContext context) {
                         TextSpan(
                           text: testimonial[index]['testi'],
                           style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black45,
-                          ),
+                              fontSize: 16,
+                              color: Colors.black45,
+                              fontStyle: FontStyle.italic),
                         ),
                         const TextSpan(
                             text: " ❞",
@@ -202,23 +293,26 @@ skillWidget({
   required String title,
   required String percent,
 }) {
-  return Column(
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(title),
-          Text("$percent%"),
-        ],
-      ),
-      const SizedBox(height: 10),
-      LinearProgressIndicator(
-        color: Colors.amber,
-        value: value,
-        minHeight: 15,
-        borderRadius: BorderRadius.circular(3),
-      ),
-    ],
+  return Padding(
+    padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(title),
+            Text("$percent%"),
+          ],
+        ),
+        const SizedBox(height: 10),
+        LinearProgressIndicator(
+          color: Colors.amber,
+          value: value,
+          minHeight: 15,
+          borderRadius: BorderRadius.circular(3),
+        ),
+      ],
+    ),
   );
 }
 
@@ -259,64 +353,64 @@ List servicesItem = [
     "icon": Icons.perm_data_setting_outlined,
     "text": "Design",
     'info':
-        'Web development encompasses the creation of websites and web applications that can be accessed  via web browsers.It involves in Various Technologies.'
+        "A UI/UX designer is a professional who identifies new opportunities to create better user experiences. They ensure that the end-to-end journey with their products or services meets desired outcomes. Aesthetically pleasing branding strategies help them effectively reach more customers."
   },
 ];
 
 List testimonial = [
   {
-    "pic": "images/profile.png",
+    "pic": "images/derek.jpg",
     'name': "Derek",
     'role': "Founder and Mentor",
     "testi":
         "Working with Saho Tech was a game-changer for your Project. His coding skills are top-notch, and his delivered results that exceeded our expectations. Truly a developer i'd recommended to anyone!",
   },
   {
-    "pic": "images/profile.png",
-    'name': "Benjamin Goku",
-    'role': "Student At TTU",
+    "pic": "images/ben.jpg",
+    'name': "Benjamin",
+    'role': "Student",
     "testi":
         "I've had the pleasure of collaborating with Saho Tech on several projects, and each time, their coding expertise and problem-solving abilities shine through. If you need a developer who can get the job done, Saho Tech is the one!",
   },
   {
-    "pic": "images/profile.png",
-    'name': "Richard Amenudzi",
-    'role': "Student At TTU",
+    "pic": "images/kesta.jpg",
+    'name': "Kesta Elorm",
+    'role': "Programmer",
     "testi":
         "Saho Tech is a developer who consistently goes above and beyond. Their attention to detail, dedication, and innovative solutions have made a significant impact on our software development. We look forward to many more successful projects together.",
   },
   {
-    "pic": "images/profile.png",
-    'name': "Kesta Rich",
-    'role': "Student At TTU",
+    "pic": "images/kujo.jpg",
+    'name': "Godson",
+    'role': "Student",
     "testi":
         "Hiring Saho Tech was one of the best decisions we made. Their coding skills are matched only by their professionalism and commitment to delivering quality work. It's a pleasure to work with such a talented developer.",
   },
   {
-    "pic": "images/profile.png",
-    'name': "Benjamin Goku",
-    'role': "Student At TTU",
+    "pic": "images/kurti.jpeg",
+    'name': "Aaron",
+    'role': "Software Enginear",
     "testi":
         "I've had the privilege of witnessing Saho Tech's coding prowess firsthand. They have an impressive ability to tackle complex challenges and turn them into elegant solutions. If you're seeking a developer who can make your vision a reality, Saho Tech is the one to trust.",
   },
   {
-    "pic": "images/profile.png",
-    'name': "Benjamin Goku",
-    'role': "Student At TTU",
+    "pic": "images/nneka.jpeg",
+    'name': "Nneka",
+    'role': "Developer",
     "testi":
         "I've worked with many developers, but Saho Tech stands out for their technical expertise and strong work ethic. They consistently meet deadlines and produce code that is both efficient and reliable. Highly recommended!",
   },
   {
-    "pic": "images/profile.png",
-    'name': "Benjamin Goku",
-    'role': "Student At TTU",
+    "pic": "images/lizy.jpg",
+    'name': "Lizzy",
+    'role': "Nurse",
     "testi":
         "When it comes to software development, Saho Tech is a true professional. Their coding skills are exceptional, and their ability to understand project requirements and deliver results is unparalleled. It's a pleasure to have Saho Tech on our team.",
   },
   {
-    "pic": "images/profile.png",
-    'name': "Benjamin Goku",
-    'role': "Student At TTU",
+    "pic": "images/rich.jpg",
+    'name': "Richmond",
+    'role': "Student",
     "testi":
         "Collaborating with Saho Tech has been a transformative experience for our development projects. Their innovative solutions and commitment to quality have had a profound impact on our success. I can't recommend Saho Tech highly enough.",
   },

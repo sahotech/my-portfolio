@@ -42,16 +42,18 @@ class _TServicesScreenState extends State<TServicesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.sizeOf(context).width;
+
     final ss = MediaQuery.sizeOf(context);
 
     return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            RichText(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: RichText(
               text: const TextSpan(
                 children: [
                   TextSpan(
@@ -73,24 +75,34 @@ class _TServicesScreenState extends State<TServicesScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            const Text(
+          ),
+          const SizedBox(height: 10),
+          const Padding(
+            padding: EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Text(
               'As a developer and designer, I have a unique skills set that combines technical expertices with creative design sensibilities. This allows me to create visually appealing and fuctional digital products. web and applications. My ability to bridge the gap between aesthetics and functionality makes me to a valuable asset in the World of Technology and Design.',
               style: TextStyle(
                 fontSize: 16,
               ),
             ),
-            const SizedBox(height: 20),
-            Container(
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Container(
               padding: const EdgeInsets.all(24),
-              height: ss.height / 2,
+              // height: ss.height / 2,
               color: Colors.white,
               width: ss.width,
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 2 / 3,
+                  childAspectRatio: screenWidth < 800
+                      ? 2 / 1.9
+                      : screenWidth < 900
+                          ? 2 / 1.5
+                          : 2 / 1,
                 ),
                 shrinkWrap: true,
                 primary: false,
@@ -99,70 +111,85 @@ class _TServicesScreenState extends State<TServicesScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.amber,
-                              child: Icon(
-                                servicesItem[index]["icon"],
-                                color: Colors.white,
+                    child: Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: myBoxShadow,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.amber,
+                                child: Icon(
+                                  servicesItem[index]["icon"],
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                servicesItem[index]["text"],
+                                style: TextStyle(
+                                  color: titleColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Flexible(
+                            child: Text(
+                              servicesItem[index]["info"],
+                              // maxLines: 7,
+                              // overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                // overflow: TextOverflow.ellipsis,
+                                fontSize: 16,
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            Text(
-                              servicesItem[index]["text"],
-                              style: TextStyle(
-                                color: titleColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          servicesItem[index]["info"],
-                          maxLines: 7,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            // overflow: TextOverflow.ellipsis,
-                            fontSize: 16,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
               ),
             ),
-            const SizedBox(height: 20),
-            const Text(
+          ),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Text(
               "Testimonials",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 20),
-            const Text(
+          ),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Text(
               "These are some of Testimonial I received for Good Work People that i have work with as Developer in my Carrier.",
               style: TextStyle(
                 fontSize: 16,
               ),
             ),
-            const SizedBox(height: 20),
-            SingleChildScrollView(
-              child: SizedBox(
-                height: ss.height / 2,
-                child: authoScrollTest(ss, context),
-              ),
+          ),
+          const SizedBox(height: 20),
+          SingleChildScrollView(
+            child: SizedBox(
+              height: ss.height / 2,
+              child: authoScrollTest(ss, context),
             ),
-            const SizedBox(height: 30),
-            const CustomFooter(),
-          ],
-        ),
+          ),
+          const SizedBox(height: 30),
+          const CustomFooter(),
+        ],
       ),
     );
   }

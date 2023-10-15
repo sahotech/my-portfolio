@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
@@ -25,13 +24,13 @@ class _MServicesScreenState extends State<MServicesScreen> {
     // final ss = MediaQuery.sizeOf(context);
 
     return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            RichText(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: RichText(
               text: const TextSpan(
                 children: [
                   TextSpan(
@@ -53,15 +52,21 @@ class _MServicesScreenState extends State<MServicesScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            const Text(
+          ),
+          const SizedBox(height: 10),
+          const Padding(
+            padding: EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Text(
               'As a developer and designer, I have a unique skills set that combines technical expertices with creative design sensibilities. This allows me to create visually appealing and fuctional digital products. web and applications. My ability to bridge the gap between aesthetics and functionality makes me to a valuable asset in the World of Technology and Design.',
               style: TextStyle(
                 fontSize: 16,
               ),
             ),
-            const SizedBox(height: 20),
-            ListView.builder(
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: ListView.builder(
               shrinkWrap: true,
               primary: false,
               // physics: const AlwaysScrollableScrollPhysics(),
@@ -114,23 +119,32 @@ class _MServicesScreenState extends State<MServicesScreen> {
                 );
               },
             ),
-            const SizedBox(height: 20),
-            const Text(
+          ),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Text(
               "Testimonials",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 20),
-            const Text(
+          ),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Text(
               "These are some of Testimonial I received for Good Work People that i have work with as Developer in my Carrier.",
               style: TextStyle(
                 fontSize: 16,
               ),
             ),
-            const SizedBox(height: 20),
-            SizedBox(
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: SizedBox(
               height: 400,
               child: ImageSlideshow(
                 autoPlayInterval: 5000,
@@ -176,7 +190,7 @@ class _MServicesScreenState extends State<MServicesScreen> {
                                     text: e['testi'],
                                     style: const TextStyle(
                                       fontSize: 16,
-                                      // fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.italic,
                                       color: Colors.black45,
                                     ),
                                   ),
@@ -196,10 +210,10 @@ class _MServicesScreenState extends State<MServicesScreen> {
                     .toList(),
               ),
             ),
-            const SizedBox(height: 30),
-            const CustomFooter()
-          ],
-        ),
+          ),
+          const SizedBox(height: 30),
+          const CustomFooter()
+        ],
       ),
     );
   }

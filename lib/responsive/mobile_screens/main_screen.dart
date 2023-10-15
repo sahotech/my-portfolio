@@ -6,11 +6,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sahotech_portfolio/constant.dart';
+import 'package:sahotech_portfolio/controllers/url_launcher_controller.dart';
 import 'package:sahotech_portfolio/responsive/mobile_screens/m_about_me.dart';
 import 'package:sahotech_portfolio/responsive/mobile_screens/m_contact.dart';
 import 'package:sahotech_portfolio/responsive/mobile_screens/m_home.dart';
 import 'package:sahotech_portfolio/responsive/mobile_screens/m_project.dart';
 import 'package:sahotech_portfolio/responsive/mobile_screens/m_service.dart';
+import 'package:sahotech_portfolio/widgets/loading_widget.dart';
 
 class MobileMainScreen extends StatefulWidget {
   const MobileMainScreen({super.key});
@@ -67,11 +69,7 @@ class _MobileMainScreenState extends State<MobileMainScreen> {
   Widget build(BuildContext context) {
     final ss = MediaQuery.sizeOf(context);
     return isLoading
-        ? const Center(
-            child: CircularProgressIndicator(
-              color: Colors.amber,
-            ),
-          )
+        ? const LoadingWidget()
         : Scaffold(
             key: sccaffoldState,
             backgroundColor: bgColor,
@@ -80,9 +78,7 @@ class _MobileMainScreenState extends State<MobileMainScreen> {
               children: [
                 // Main Body
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 4,
-                  ),
+                  padding: const EdgeInsets.only(left: 4, bottom: 4),
                   child: navItems[currentIndex]['page'],
                 ),
 
@@ -146,7 +142,7 @@ class _MobileMainScreenState extends State<MobileMainScreen> {
                       },
                       backgroundColor: Colors.white10,
                       radius: 50,
-                      backgroundImage: Image.network(
+                      backgroundImage: Image.asset(
                         profile,
                         fit: BoxFit.fill,
                       ).image,
@@ -163,42 +159,81 @@ class _MobileMainScreenState extends State<MobileMainScreen> {
                   ),
                   const SizedBox(height: 10),
                   // List of Social Media Links
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.white10,
-                        child: Icon(
-                          FontAwesomeIcons.twitter,
-                          color: Colors.white70,
+                      CupertinoButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          UrlLauncherController().launchGithub();
+                        },
+                        child: const CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.white10,
+                          child: Icon(
+                            FontAwesomeIcons.github,
+                            color: Colors.white70,
+                          ),
                         ),
                       ),
-                      SizedBox(width: 7),
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.white10,
-                        child: Icon(
-                          FontAwesomeIcons.facebook,
-                          color: Colors.white70,
+                      const SizedBox(width: 7),
+                      CupertinoButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          UrlLauncherController().launchLinkedIn();
+                        },
+                        child: const CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.white10,
+                          child: Icon(
+                            FontAwesomeIcons.linkedin,
+                            color: Colors.white70,
+                          ),
                         ),
                       ),
-                      SizedBox(width: 7),
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.white10,
-                        child: Icon(
-                          FontAwesomeIcons.instagram,
-                          color: Colors.white70,
+                      const SizedBox(width: 7),
+                      CupertinoButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          UrlLauncherController().launchTwitter();
+                        },
+                        child: const CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.white10,
+                          child: Icon(
+                            FontAwesomeIcons.twitter,
+                            color: Colors.white70,
+                          ),
                         ),
                       ),
-                      SizedBox(width: 7),
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.white10,
-                        child: Icon(
-                          FontAwesomeIcons.linkedin,
-                          color: Colors.white70,
+                      const SizedBox(width: 7),
+                      CupertinoButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          UrlLauncherController().launchFacebook();
+                        },
+                        child: const CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.white10,
+                          child: Icon(
+                            FontAwesomeIcons.facebook,
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 7),
+                      CupertinoButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          UrlLauncherController().launchIg();
+                        },
+                        child: const CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.white10,
+                          child: Icon(
+                            FontAwesomeIcons.instagram,
+                            color: Colors.white70,
+                          ),
                         ),
                       ),
                     ],

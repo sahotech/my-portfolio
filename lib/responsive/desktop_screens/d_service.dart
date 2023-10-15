@@ -58,14 +58,14 @@ class _DServicesScreenState extends State<DServicesScreen> {
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(24),
-              height: ss.height / 2,
+              // height: ss.height / 2,
               color: Colors.white,
               width: ss.width,
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 2 / 3,
+                  childAspectRatio: 2 / 1.9,
                 ),
                 shrinkWrap: true,
                 primary: false,
@@ -74,39 +74,48 @@ class _DServicesScreenState extends State<DServicesScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.amber,
-                              child: Icon(
-                                servicesItem[index]["icon"],
-                                color: Colors.white,
+                    child: Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: myBoxShadow,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.amber,
+                                child: Icon(
+                                  servicesItem[index]["icon"],
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                servicesItem[index]["text"],
+                                style: TextStyle(
+                                  color: titleColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Flexible(
+                            child: Text(
+                              servicesItem[index]["info"],
+                              // maxLines: 7,
+                              // overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                // overflow: TextOverflow.ellipsis,
+                                fontSize: 16,
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            Text(
-                              servicesItem[index]["text"],
-                              style: TextStyle(
-                                color: titleColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          servicesItem[index]["info"],
-                          maxLines: 7,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            // overflow: TextOverflow.ellipsis,
-                            fontSize: 16,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -208,7 +217,7 @@ class _DServicesScreenState extends State<DServicesScreen> {
                             text: testimonial[index]['testi'],
                             style: const TextStyle(
                               fontSize: 16,
-                              // fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.italic,
                               color: Colors.black45,
                             ),
                           ),

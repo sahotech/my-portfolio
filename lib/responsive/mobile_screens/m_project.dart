@@ -19,14 +19,14 @@ class _MProjectScreenState extends State<MProjectScreen> {
   Widget build(BuildContext context) {
     final ss = MediaQuery.sizeOf(context);
     return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            RichText(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: RichText(
               text: const TextSpan(
                 children: [
                   TextSpan(
@@ -48,21 +48,32 @@ class _MProjectScreenState extends State<MProjectScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            const Text(
+          ),
+          const SizedBox(height: 10),
+          const Padding(
+            padding: EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Text(
               'Here are some of my Projects, the rest of the project are available Github.',
               style: TextStyle(
                 fontSize: 16,
               ),
             ),
-            const SizedBox(height: 20),
-            Container(
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            // padding: const EdgeInsets.all(8.0),
+            child: Container(
               color: Colors.amber,
               padding: const EdgeInsets.all(8),
               child: const Text('Western tyre App'),
             ),
-            const SizedBox(height: 10),
-            Container(
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            // padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Container(
               padding: const EdgeInsets.all(16),
               height: ss.height - 200,
               width: ss.width,
@@ -107,14 +118,20 @@ class _MProjectScreenState extends State<MProjectScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            Container(
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Container(
               color: Colors.amber,
               padding: const EdgeInsets.all(8),
               child: const Text('News Portal App'),
             ),
-            const SizedBox(height: 10),
-            Container(
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+            child: Container(
               padding: const EdgeInsets.all(16),
               height: ss.height - 200,
               width: ss.width,
@@ -155,10 +172,10 @@ class _MProjectScreenState extends State<MProjectScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
-            const CustomFooter()
-          ],
-        ),
+          ),
+          const SizedBox(height: 30),
+          const CustomFooter()
+        ],
       ),
     );
   }

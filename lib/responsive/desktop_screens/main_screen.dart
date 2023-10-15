@@ -6,12 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sahotech_portfolio/constant.dart';
+import 'package:sahotech_portfolio/controllers/url_launcher_controller.dart';
 import 'package:sahotech_portfolio/responsive/desktop_screens/d_about_me.dart';
 import 'package:sahotech_portfolio/responsive/desktop_screens/d_contact.dart';
 import 'package:sahotech_portfolio/responsive/desktop_screens/d_home.dart';
 import 'package:sahotech_portfolio/responsive/desktop_screens/d_project.dart';
 import 'package:sahotech_portfolio/responsive/desktop_screens/d_service.dart';
 import 'package:sahotech_portfolio/widgets/footer_widget.dart';
+import 'package:sahotech_portfolio/widgets/loading_widget.dart';
 
 class DesktopMainScreen extends StatefulWidget {
   const DesktopMainScreen({super.key});
@@ -66,11 +68,7 @@ class _DesktopMainScreenState extends State<DesktopMainScreen> {
   Widget build(BuildContext context) {
     final ss = MediaQuery.sizeOf(context);
     return isLoading
-        ? const Center(
-            child: CircularProgressIndicator(
-              color: Colors.amber,
-            ),
-          )
+        ? const LoadingWidget()
         : Scaffold(
             backgroundColor: bgColor,
             body: Row(
@@ -78,7 +76,7 @@ class _DesktopMainScreenState extends State<DesktopMainScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 4, bottom: 4, top: 4),
+                  padding: const EdgeInsets.only(left: 4, bottom: 4, right: 2),
                   child: Container(
                     height: ss.height,
                     width: 300,
@@ -104,7 +102,7 @@ class _DesktopMainScreenState extends State<DesktopMainScreen> {
                             },
                             backgroundColor: Colors.white10,
                             radius: 50,
-                            backgroundImage: Image.network(
+                            backgroundImage: Image.asset(
                               profile,
                               fit: BoxFit.fill,
                             ).image,
@@ -121,42 +119,81 @@ class _DesktopMainScreenState extends State<DesktopMainScreen> {
                         ),
                         const SizedBox(height: 10),
                         // List of Social Media Links
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.white10,
-                              child: Icon(
-                                FontAwesomeIcons.twitter,
-                                color: Colors.white70,
+                            CupertinoButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                UrlLauncherController().launchGithub();
+                              },
+                              child: const CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.white10,
+                                child: Icon(
+                                  FontAwesomeIcons.github,
+                                  color: Colors.white70,
+                                ),
                               ),
                             ),
-                            SizedBox(width: 7),
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.white10,
-                              child: Icon(
-                                FontAwesomeIcons.facebook,
-                                color: Colors.white70,
+                            const SizedBox(width: 7),
+                            CupertinoButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                UrlLauncherController().launchLinkedIn();
+                              },
+                              child: const CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.white10,
+                                child: Icon(
+                                  FontAwesomeIcons.linkedin,
+                                  color: Colors.white70,
+                                ),
                               ),
                             ),
-                            SizedBox(width: 7),
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.white10,
-                              child: Icon(
-                                FontAwesomeIcons.instagram,
-                                color: Colors.white70,
+                            const SizedBox(width: 7),
+                            CupertinoButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                UrlLauncherController().launchTwitter();
+                              },
+                              child: const CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.white10,
+                                child: Icon(
+                                  FontAwesomeIcons.twitter,
+                                  color: Colors.white70,
+                                ),
                               ),
                             ),
-                            SizedBox(width: 7),
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.white10,
-                              child: Icon(
-                                FontAwesomeIcons.linkedin,
-                                color: Colors.white70,
+                            const SizedBox(width: 7),
+                            CupertinoButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                UrlLauncherController().launchFacebook();
+                              },
+                              child: const CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.white10,
+                                child: Icon(
+                                  FontAwesomeIcons.facebook,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 7),
+                            CupertinoButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                UrlLauncherController().launchIg();
+                              },
+                              child: const CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.white10,
+                                child: Icon(
+                                  FontAwesomeIcons.instagram,
+                                  color: Colors.white70,
+                                ),
                               ),
                             ),
                           ],
@@ -217,7 +254,7 @@ class _DesktopMainScreenState extends State<DesktopMainScreen> {
                             },
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         const CustomFooter(),
                       ],
                     ),
@@ -227,8 +264,8 @@ class _DesktopMainScreenState extends State<DesktopMainScreen> {
                 // Main Body
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 4,
+                    padding: const EdgeInsets.only(
+                      bottom: 4,
                     ),
                     child: navItems[currentIndex]['page'],
                   ),

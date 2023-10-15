@@ -1,10 +1,12 @@
 import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sahotech_portfolio/constant.dart';
+import 'package:sahotech_portfolio/controllers/email_controller.dart';
+import 'package:sahotech_portfolio/controllers/url_launcher_controller.dart';
 
 import 'package:sahotech_portfolio/widgets/footer_widget.dart';
 
@@ -24,95 +26,178 @@ class _MHomeScreenState extends State<MHomeScreen> {
 
   final TextEditingController message = TextEditingController();
 
-  // bool isLoading = false;
+  bool isLoading = false;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   isLoading = true;
-  //   Future.delayed(const Duration(seconds: 8), () {
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   });
-  // }
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final ss = MediaQuery.sizeOf(context);
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: ss.width,
-            height: ss.height,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                filterQuality: FilterQuality.high,
-                fit: BoxFit.fitWidth,
-                image: NetworkImage(
-                  profile,
-                ),
-              ),
-            ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
             child: Container(
-              color: Colors.black54,
               width: ss.width,
               height: ss.height,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 6, 5, 20),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ),
+              ),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(width: 100),
-                    const Text(
-                      "Peter Saho",
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 1,
+                    // Greeting
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 24),
+                        child: Text(
+                          'Hello everyone!',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      width: 300.0,
-                      child: DefaultTextStyle(
-                        style: const TextStyle(
-                          fontSize: 30.0,
-                          fontFamily: 'Bobbers',
-                        ),
-                        child: AnimatedTextKit(
-                          repeatForever: true,
-                          pause: const Duration(seconds: 1),
-                          animatedTexts: [
-                            TyperAnimatedText(
-                              speed: const Duration(milliseconds: 100),
-                              "I'm Mobile and Web App Developer",
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300,
+
+                    const SizedBox(height: 10),
+
+                    // Name
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'My name is ',
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                            ),
-                            TyperAnimatedText(
-                              speed: const Duration(milliseconds: 100),
-                              "I'm UI, UX and Product Designer",
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
-                          ],
+                              TextSpan(
+                                text: ' Peter Saho',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Intro
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: SizedBox(
+                          width: 500.0,
+                          child: DefaultTextStyle(
+                            style: const TextStyle(
+                              fontSize: 30.0,
+                              fontFamily: 'Bobbers',
+                            ),
+                            child: AnimatedTextKit(
+                              repeatForever: true,
+                              pause: const Duration(seconds: 1),
+                              animatedTexts: [
+                                TyperAnimatedText(
+                                  speed: const Duration(milliseconds: 100),
+                                  "I'm Mobile and Web App Developer",
+                                  textStyle: const TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                TyperAnimatedText(
+                                  speed: const Duration(milliseconds: 100),
+                                  "I'm UI, UX and Product Designer",
+                                  textStyle: const TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // Github and LinkedIn  Link
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            height: 45,
+                            child: OutlinedButton.icon(
+                              onPressed: () {
+                                UrlLauncherController().launchGithub();
+                              },
+                              icon: const Icon(
+                                FontAwesomeIcons.github,
+                              ),
+                              label: const Text(
+                                'Github',
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          SizedBox(
+                            height: 45,
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                UrlLauncherController().launchLinkedIn();
+                              },
+                              icon: const Icon(
+                                FontAwesomeIcons.linkedin,
+                              ),
+                              label: const Text(
+                                'LinkedIn',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Profile image
+                    CircleAvatar(
+                      backgroundColor: Colors.white10,
+                      radius: 100,
+                      backgroundImage: Image.asset(
+                        profile,
+                        fit: BoxFit.fill,
+                      ).image,
                     ),
                   ],
                 ),
               ),
             ),
           ),
+
+          ///
           // About me
           Container(
             color: Colors.white,
@@ -502,6 +587,7 @@ class _MHomeScreenState extends State<MHomeScreen> {
                                         text: e['testi'],
                                         style: const TextStyle(
                                           fontSize: 16,
+                                          fontStyle: FontStyle.italic,
                                           // fontWeight: FontWeight.w600,
                                           color: Colors.black45,
                                         ),
@@ -552,42 +638,16 @@ class _MHomeScreenState extends State<MHomeScreen> {
                           fontWeight: FontWeight.bold,
                           color: Colors.amber,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                    boxShadow: myBoxShadow,
-                  ),
-                  child: const Column(
-                    children: [
-                      // contactrow(
-                      //   ss: ss,
-                      //   icon: Icons.location_on_outlined,
-                      //   title: "Location",
-                      //   text: "HUVU AVENUE, Takoradi, Ghana",
-                      // ),
-                      // const SizedBox(height: 20),
-                      // contactrow(
-                      //   ss: ss,
-                      //   icon: Icons.email_outlined,
-                      //   title: "Email",
-                      //   text: "sahotech06@gmail.com",
-                      // ),
-                      SizedBox(height: 20),
-                      // contactrow(
-                      //   ss: ss,
-                      //   icon: Icons.call_outlined,
-                      //   title: "Call",
-                      //   text: "+233 242780205, +233 256787512 ",
-                      // ),
-                      SizedBox(height: 20),
-                    ],
+                const Text(
+                  'I am interested in connecting with you and would love to hear more about your thoughts and ideas. Please feel free to reach out to me at your convenience.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -599,62 +659,144 @@ class _MHomeScreenState extends State<MHomeScreen> {
                     boxShadow: myBoxShadow,
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Your Name'),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.all(16),
-                        ),
-                        cursorColor: Colors.amber,
-                        controller: name,
+                      contactrow(
+                        ss: ss,
+                        title: 'Location:  ',
+                        text: 'HUDU AVENUE, Takoradi, Ghana',
+                        icon: Icons.location_on_outlined,
                       ),
                       const SizedBox(height: 20),
-                      const Text('Your Email'),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.all(16),
-                        ),
-                        cursorColor: Colors.amber,
-                        controller: email,
+                      contactrow(
+                        ss: ss,
+                        title: 'Email:  ',
+                        text: 'sahotech06@gmail.com',
+                        icon: Icons.email_outlined,
                       ),
                       const SizedBox(height: 20),
-                      const Text('Subject'),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        cursorColor: Colors.amber,
-                        controller: subject,
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.all(16),
-                        ),
+                      contactrow(
+                        ss: ss,
+                        title: 'Call:  ',
+                        text: '+233 242780205',
+                        icon: Icons.call_outlined,
                       ),
                       const SizedBox(height: 20),
-                      const Text('Message'),
-                      const SizedBox(height: 10),
-                      TextFormField(
-                        maxLines: 5,
-                        cursorColor: Colors.amber,
-                        controller: message,
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.all(16),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Form(
+                  key: formKey,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: myBoxShadow,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Your Name'),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter your name';
+                            } else {
+                              return null;
+                            }
+                          },
+                          cursorColor: Colors.amber,
+                          controller: name,
                         ),
-                      ),
-                      // const SizedBox(height: 20),
-                      const SizedBox(height: 30),
-                      Center(
-                        child: SizedBox(
-                          height: 45,
-                          width: ss.width * 0.5,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text('Submit'),
+                        const SizedBox(height: 20),
+                        const Text('Your Email'),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isNotEmpty || value.contains('@')) {
+                              return null;
+                            } else {
+                              return 'Enter your name';
+                            }
+                          },
+                          cursorColor: Colors.amber,
+                          controller: email,
+                        ),
+                        const SizedBox(height: 20),
+                        const Text('Subject'),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          cursorColor: Colors.amber,
+                          controller: subject,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter subject';
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        const Text('Message'),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          maxLines: 5,
+                          cursorColor: Colors.amber,
+                          controller: message,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter message';
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                        // const SizedBox(height: 20),
+                        const SizedBox(height: 30),
+                        Center(
+                          child: SizedBox(
+                            height: 45,
+                            width: ss.width * 0.5,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+                                  await EmailController()
+                                      .sendEmail(
+                                    context: context,
+                                    name: name.text,
+                                    email: email.text,
+                                    subject: subject.text,
+                                    message: message.text,
+                                  )
+                                      .whenComplete(() {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                  });
+                                }
+                              },
+                              child: isLoading
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : const Text('Submit'),
+                            ),
                           ),
                         ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -662,10 +804,7 @@ class _MHomeScreenState extends State<MHomeScreen> {
           ),
 
           const SizedBox(height: 30),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: CustomFooter(),
-          ),
+          const CustomFooter(),
         ],
       ),
     );

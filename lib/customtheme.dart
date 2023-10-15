@@ -10,9 +10,6 @@ themedData() {
         backgroundColor: Colors.amber,
         foregroundColor: Colors.white,
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
-        ),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -34,35 +31,27 @@ themedData() {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.only(left: 8),
-      // border: OutlineInputBorder(
-      //   borderRadius: BorderRadius.circular(5),
-      //   borderSide: const BorderSide(
-      //     color: Colors.black26,
-      //   ),
-      // ),
-
+      contentPadding: const EdgeInsets.all(8),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(5),
+        borderSide: BorderSide(
+          color: Colors.grey.shade400,
+        ),
+        gapPadding: 8.0,
+      ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
-        borderSide: const BorderSide(
-          color: Colors.black26,
+        borderSide: BorderSide(
+          color: Colors.grey.shade400,
         ),
+        gapPadding: 8.0,
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
         borderSide: const BorderSide(
           color: Colors.amber,
         ),
-      ),
-      disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5),
-        borderSide: const BorderSide(
-          color: Colors.black26,
-        ),
-      ),
-      hintStyle: const TextStyle(
-        color: Colors.black45,
-        fontSize: 16,
+        gapPadding: 8.0,
       ),
       suffixIconColor: Colors.black38,
       prefixIconColor: Colors.black38,

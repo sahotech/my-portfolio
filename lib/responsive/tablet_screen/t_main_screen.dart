@@ -12,6 +12,7 @@ import 'package:sahotech_portfolio/responsive/tablet_screen/t_contact.dart';
 import 'package:sahotech_portfolio/responsive/tablet_screen/t_home.dart';
 import 'package:sahotech_portfolio/responsive/tablet_screen/t_project.dart';
 import 'package:sahotech_portfolio/responsive/tablet_screen/t_service.dart';
+import 'package:sahotech_portfolio/widgets/loading_widget.dart';
 
 class TabletMainScreen extends StatefulWidget {
   const TabletMainScreen({super.key});
@@ -24,7 +25,7 @@ class _TabletMainScreenState extends State<TabletMainScreen> {
   late final AssetBundle? bundle;
   // List of Nav text
   List<dynamic> navItems = [
-    {'text': 'Home', 'icon': Icons.home_outlined, 'page': THomeScreen()},
+    {'text': 'Home', 'icon': Icons.home_outlined, 'page': const THomeScreen()},
     {
       'text': 'About',
       'icon': Icons.person_outline,
@@ -67,12 +68,9 @@ class _TabletMainScreenState extends State<TabletMainScreen> {
   @override
   Widget build(BuildContext context) {
     final ss = MediaQuery.sizeOf(context);
+
     return isLoading
-        ? const Center(
-            child: CircularProgressIndicator(
-              color: Colors.amber,
-            ),
-          )
+        ? const LoadingWidget()
         : Scaffold(
             key: sccaffoldState,
             backgroundColor: bgColor,
@@ -81,9 +79,7 @@ class _TabletMainScreenState extends State<TabletMainScreen> {
               children: [
                 // Main Body
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 4,
-                  ),
+                  padding: const EdgeInsets.only(bottom: 4, left: 4),
                   child: navItems[currentIndex]['page'],
                 ),
 
@@ -146,7 +142,7 @@ class _TabletMainScreenState extends State<TabletMainScreen> {
                       },
                       backgroundColor: Colors.white10,
                       radius: 50,
-                      backgroundImage: Image.network(
+                      backgroundImage: Image.asset(
                         profile,
                         fit: BoxFit.fill,
                       ).image,
