@@ -39,7 +39,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/sahotech/my-portfolio.git`
+ Clone the repository: `git clone https://github.com/sahotech/my-portfolio.git`
 
 
 
